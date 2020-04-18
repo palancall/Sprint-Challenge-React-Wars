@@ -34,6 +34,10 @@ const Character = (props) => {
 
   const ImageDiv = styled.div``;
 
+  const Heading = styled.h2`
+    text-align: center;
+  `;
+
   return (
     <div>
       <Card>
@@ -41,7 +45,7 @@ const Character = (props) => {
           <Image src={character.image} alt={character.name} />
         </ImageDiv>
         <CardBody>
-          <h2>{character.name}</h2>
+          <Heading>{character.name}</Heading>
           <DescriptionDiv>
             <span>Gender:</span>
             <span>{character.gender}</span>

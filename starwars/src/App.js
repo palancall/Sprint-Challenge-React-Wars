@@ -11,6 +11,7 @@ const App = () => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoanding] = useState(false);
   const [search, setSearch] = useState("");
+  const [filtered, setFiltered] = useState([]);
 
   // Fetch characters from the API in an effect hook. Remember, anytime you have a
   // side effect in a component, you want to think about which state and/or props it should
@@ -26,14 +27,19 @@ const App = () => {
       });
   }, []);
 
-  const filteredCharacters = characters.filter((char) => {
-    return char.name.toLowerCase().includes(search.toLowerCase());
-  });
+  useEffect(() => {
+    setFiltered(
+      characters.filter((char) => {
+        return char.name.toLowerCase().includes(search.toLowerCase());
+      })
+    );
+  }, [search, characters]);
+
   return (
     <div className="App">
       <SearchBar search={search} setSearch={setSearch} />
       <div className="character-div">
-        {filteredCharacters.map((character) => {
+        {filtered.map((character) => {
           return <Character character={character} />;
         })}
       </div>
