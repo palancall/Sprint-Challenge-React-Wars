@@ -9,6 +9,9 @@ const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
   const [characters, setCharacters] = useState([]);
+  const [loading, setLoanding] = useState(false);
+  const [search, setSearch] = useState("");
+
   // Fetch characters from the API in an effect hook. Remember, anytime you have a
   // side effect in a component, you want to think about which state and/or props it should
   // sync up with, if any.
@@ -16,18 +19,21 @@ const App = () => {
     axios
       .get("https://rickandmortyapi.com/api/character")
       .then((response) => {
-        console.log(response.data.results);
         setCharacters(response.data.results);
       })
       .catch((error) => {
         console.log("error!", error);
       });
   }, []);
+
+  const filteredCharacters = characters.filter((char) => {
+    return char.name.toLowerCase().includes(search.toLowerCase());
+  });
   return (
     <div className="App">
-      <SearchBar />
+      <SearchBar search={search} setSearch={setSearch} />
       <div className="character-div">
-        {characters.map((character) => {
+        {filteredCharacters.map((character) => {
           return <Character character={character} />;
         })}
       </div>

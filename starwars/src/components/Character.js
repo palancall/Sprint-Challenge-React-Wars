@@ -9,6 +9,9 @@ const Card = styled.div`
   border-radius: 10px;
   -webkit-box-shadow: 5px 5px 15px 5px #000000;
   box-shadow: 5px 5px 15px 5px #000000;
+  &:hover {
+    border: 4px solid #ce5937;
+  }
 `;
 
 const DescriptionDiv = styled.div`
