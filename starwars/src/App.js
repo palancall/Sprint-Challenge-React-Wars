@@ -3,6 +3,7 @@ import "./App.css";
 import Character from "./components/Character";
 import axios from "axios";
 import "./index.css";
+import SearchBar from "./components/SearchBar";
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -24,9 +25,12 @@ const App = () => {
   }, []);
   return (
     <div className="App">
-      {characters.map((character) => {
-        return <Character character={character} />;
-      })}
+      <SearchBar />
+      <div className="character-div">
+        {characters.map((character) => {
+          return <Character character={character} />;
+        })}
+      </div>
     </div>
   );
 };
